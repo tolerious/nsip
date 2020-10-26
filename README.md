@@ -1,1 +1,3 @@
-sip协议的nodejs开源实现、
+# nsip
+
+SIP 协议的 nodejs 实现版本。

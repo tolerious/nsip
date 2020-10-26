@@ -1,0 +1,29 @@
+{
+  "name": "nsip",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "sip protocol, nodejs implement.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolerious/nsip.git"
+  },
+  "keywords": [
+    "sip",
+    "nodejs",
+    "sip2"
+  ],
+  "author": "tolerious",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tolerious/nsip/issues"
+  },
+  "homepage": "https://github.com/tolerious/nsip#readme"
+}
