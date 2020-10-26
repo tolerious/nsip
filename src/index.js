@@ -5,11 +5,19 @@ const server = dgram.createSocket("udp4");
 
 server.on("message", (msg, rinfo) => {
   let siprequest = new sipRequest(msg);
-  console.log(siprequest.sipString);
+  let str = `%c##############################Received##############################
+${siprequest.sipString}
+####################################################################
+  `;
+  console.log(str, "color:gold");
+
   let method = siprequest.getMethod();
   console.log(`method:${method}`);
   let version = siprequest.getSipVersion();
   console.log(`version: ${version}`);
+  // server.send(Buffer.from("abc"), 5060, "192.168.13.100", (err) => {
+  //   console.log(err);
+  // });
   // let sipBody = msg.toString();
   // console.log(`sip body:  ${sipBody}`);
   // let splitString = sipBody.split("\r\n");
