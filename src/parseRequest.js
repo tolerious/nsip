@@ -45,7 +45,7 @@ class sipRequest {
     let callID = "Call-ID: " + uuid.v4() + "@192.168.13.100" + "\r\n";
     let MaxForwards = "Max-Forwards: 70" + "\r\n";
     let wwwAuthenticate =
-      `WWW-Authenticate: Digest realm="3402000000",nonce="31ada55697307236"` +
+      `WWW-Authenticate: Digest username="34020000002000000001", realm="3402000000", nonce="bd2e4df9e3d9b280", uri="sip:64000000002000000001@192.168.13.100:5060", response="9c8411f2b96c5aef55eb136ba3f34655", algorithm=MD5` +
       "\r\n";
     let contentLength = "Content-Length: 0" + "\r\n" + "\r\n";
     return (
