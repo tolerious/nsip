@@ -31,14 +31,13 @@ class sipRequest {
   generate401Response() {
     let firstLine = "SIP/2.0 401 Unauthorized" + "\r\n";
     let toString =
-      "To: <sip:340200000013200000001@192.168.13.100:5060>;tag=" +
-      uuid.v4() +
+      "To: <sip:340200000013200000001@192.168.13.100:5060>" +
       "\r\n";
     let fromString =
       "From: <sip:340200000013200000001@192.168.13.100:5060>;tag=" +
       this.getFromTag() +
       "\r\n";
-    let Cseq = "CSeq: 5 REGISTER" + "\r\n";
+    let Cseq = "Cseq: 1 REGISTER" + "\r\n";
     let VIA =
       "Via: SIP/2.0/UDP 192.168.13.100:5060;rport=5060;branch=z9hG4bK" +
       uuid.v4() +

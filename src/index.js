@@ -14,7 +14,7 @@ ${siprequest.sipString}
   console.log(siprequest.generate401Response());
   server.send(
     // Buffer.from(siprequest.generate401Response()),
-    siprequest.generate401Response(),
+    Buffer.from(siprequest.generate401Response()),
     5060,
     "192.168.13.100",
     (err) => {
