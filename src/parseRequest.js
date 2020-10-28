@@ -52,9 +52,14 @@ class sipRequest {
     let fromString = "<sip:" + this.getSipClientSipAddress() + ">" + "\r\n";
     let Cseq = "CSeq: 1 REGISTER" + "\r\n";
     let VIA =
-      "Via: SIP/2.0/UDP 192.168.13.100:5060;rport=5060;branch=" +
+      "Via: SIP/2.0/UDP " +
+      this.clientServer +
+      ";rport=" +
+      this.clientServer.split(":")[1] +
+      ";branch=" +
       this.getViaBranch() +
-      ";received=192.168.13.100" +
+      ";received=" +
+      this.clientServer.split(":")[0] +
       "\r\n";
     let callID = this.getCallID() + "\r\n";
     let wwwAuthenticate =

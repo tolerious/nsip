@@ -6,9 +6,9 @@ const server = dgram.createSocket("udp4");
 
 server.on("message", (msg, rinfo) => {
   let siprequest = new sipRequest(msg);
-  let str = `%c##############################Received##############################
+  let str = `%c##############################Received from client##############################
 ${siprequest.sipString}
-####################################################################`;
+#############################Received end#######################################`;
   console.log(str, "color:gold");
   /**
    * 判断是什么命令
