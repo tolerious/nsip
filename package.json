@@ -1,7 +1,6 @@
 {
   "name": "nsip",
   "version": "1.0.0",
-  "type": "module",
   "description": "sip protocol, nodejs implement.",
   "main": "index.js",
   "directories": {
@@ -25,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/tolerious/nsip/issues"
   },
-  "homepage": "https://github.com/tolerious/nsip#readme"
+  "homepage": "https://github.com/tolerious/nsip#readme",
+  "dependencies": {
+    "uuid": "^8.3.1",
+    "xml2js": "^0.4.23"
+  }
 }
