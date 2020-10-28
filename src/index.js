@@ -14,6 +14,7 @@ ${siprequest.sipString}
    * 判断是什么命令
    */
   let requestType = siprequest.getRequestType();
+  console.log(requestType);
   switch (requestType) {
     case "REGISTER":
       if (siprequest.sipString.includes("Authorization") > 0) {
@@ -39,6 +40,14 @@ ${siprequest.sipString}
           }
         );
       }
+      break;
+    case "MESSAGE":
+      let s = siprequest.sipString.split("\r\n");
+      let body = s[s.length - 1];
+      let parseString = require("xml2js").parseString;
+      parseString(body, function (err, result) {
+        console.log(result);
+      });
       break;
     default:
       break;

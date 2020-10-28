@@ -124,9 +124,12 @@ class sipRequest {
     let contentLength = "Content-Length: 0" + "\r\n";
     let finalStr =
       firstLine +
-      VIA +
-      fromString +
-      toString +
+      this.getViaLine() +
+      "\r\n" +
+      this.getFromLine() +
+      "\r\n" +
+      this.getToLine() +
+      "\r\n" +
       Cseq +
       callID +
       wwwAuthenticate +
