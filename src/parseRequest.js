@@ -4,8 +4,8 @@ class sipRequest {
     this.sipString = sipString.toString();
     this.sipStringParse2Array = this.sipString.split("\r\n");
     this.firstLine = this.sipStringParse2Array[0];
-    this.username = "";
-    this.clientServer = "";
+    this.username = "340200000013200000001";
+    this.clientServer = "192.168.13.100:5060";
   }
   /**
    * 获取请求类型
@@ -24,14 +24,35 @@ class sipRequest {
   }
   /**
    * 获取向服务器发起注册的客户端的地址信息,注意只在客户端往服务器发送的消息中有效
+   * username@hostname
    */
   getSipClientSipAddress() {
     let middle = this.firstLine.split(" ")[1];
     return middle;
   }
-  getSipClientAddress() {
-    let m = this.getSipClientSipAddress().replace("spi:", "");
-    [this.username, this.clientServer] = m.split("@");
+  getFromLine() {
+    for (var i = 0; i < this.sipStringParse2Array.length; i++) {
+      if (this.sipStringParse2Array[i].includes("From") > 0) {
+        return this.sipStringParse2Array[i];
+      }
+    }
+  }
+  getToLine() {
+    for (var i = 0; i < this.sipStringParse2Array.length; i++) {
+      if (this.sipStringParse2Array[i].includes("To") > 0) {
+        return this.sipStringParse2Array[i];
+      }
+    }
+  }
+  getViaLine() {
+    for (var i = 0; i < this.sipStringParse2Array.length; i++) {
+      if (this.sipStringParse2Array[i].includes("Via") > 0) {
+        return this.sipStringParse2Array[i];
+      }
+    }
+  }
+  getCSeq() {
+    return this.sipStringParse2Array[5];
   }
   getFromeString() {
     return this.sipStringParse2Array[2];
@@ -45,8 +66,43 @@ class sipRequest {
   getViaBranch() {
     return this.sipStringParse2Array[1].split("=")[1];
   }
+  generate200Response() {
+    let d = new Date();
+    let yearMonthDay = d.toLocaleDateString().replace("/", "-");
+    let hour = d.getHours();
+    let minute = d.getMinutes();
+    let second = d.getSeconds();
+    let mill = d.getMilliseconds();
+    let timeString = `T${hour}:${minute}:${second}.${mill}`;
+    let date = yearMonthDay + timeString;
+    let str =
+      `SIP/2.0 200 OK` +
+      "\r\n" +
+      this.getViaLine() +
+      "\r\n" +
+      this.getFromLine() +
+      "\r\n" +
+      this.getToLine() +
+      "\r\n" +
+      this.getCSeq() +
+      "\r\n" +
+      `${this.getCallID()}` +
+      "\r\n" +
+      `Contact: <sip:${this.username}@${this.clientServer}>` +
+      "\r\n" +
+      `Expires: 3600` +
+      "\r\n" +
+      `Date: ${date}` +
+      "\r\n" +
+      `Content-Length: 0` +
+      "\r\n" +
+      "\r\n";
+    console.log(`#########generate 200 response#########`);
+    console.log(str);
+    console.log(`#########end 200 response#########`);
+    return str;
+  }
   generate401Response() {
-    this.getSipClientAddress();
     let firstLine = "SIP/2.0 401 Unauthorized" + "\r\n";
     let toString = "<sip:" + this.getSipClientSipAddress() + ">" + "\r\n";
     let fromString = "<sip:" + this.getSipClientSipAddress() + ">" + "\r\n";
