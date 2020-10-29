@@ -1,3 +1,3 @@
 # nsip
 
-SIP 协议的 nodejs 实现版本。
+国标GB28181标准的 nodejs 实现版本。
