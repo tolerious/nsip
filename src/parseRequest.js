@@ -22,14 +22,6 @@ class sipRequest {
       return type;
     }
   }
-  /**
-   * 获取向服务器发起注册的客户端的地址信息,注意只在客户端往服务器发送的消息中有效
-   * username@hostname
-   */
-  getSipClientSipAddress() {
-    let middle = this.firstLine.split(" ")[1];
-    return middle;
-  }
   getFromLine() {
     for (var i = 0; i < this.sipStringParse2Array.length; i++) {
       if (this.sipStringParse2Array[i].includes("From") > 0) {
@@ -104,19 +96,7 @@ class sipRequest {
   }
   generate401Response() {
     let firstLine = "SIP/2.0 401 Unauthorized" + "\r\n";
-    let toString = "<sip:" + this.getSipClientSipAddress() + ">" + "\r\n";
-    let fromString = "<sip:" + this.getSipClientSipAddress() + ">" + "\r\n";
     let Cseq = "CSeq: 1 REGISTER" + "\r\n";
-    let VIA =
-      "Via: SIP/2.0/UDP " +
-      this.clientServer +
-      ";rport=" +
-      this.clientServer.split(":")[1] +
-      ";branch=" +
-      this.getViaBranch() +
-      ";received=" +
-      this.clientServer.split(":")[0] +
-      "\r\n";
     let callID = this.getCallID() + "\r\n";
     let wwwAuthenticate =
       'WWW-Authenticate: Digest realm="64010000",nonce="6fe9ba44a76be22a",algorithm=MD5' +
