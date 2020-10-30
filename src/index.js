@@ -14,7 +14,6 @@ ${siprequest.sipString}
    * 判断是什么命令
    */
   let requestType = siprequest.getRequestType();
-  console.log(requestType);
   switch (requestType) {
     case "REGISTER":
       if (siprequest.sipString.includes("Authorization") > 0) {
